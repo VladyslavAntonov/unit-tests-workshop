@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import * as styles from './content.module.scss';
 
-import { HttpService } from '../../service/http-service';
-import { useAsync } from '../../hooks/use-async';
+import { useAsync } from '../../hooks';
+import { HttpService } from '../../service';
 
 import { ErrorPanel } from '../error-panel';
-import { Spinner } from '../spinner';
 import { Posts } from '../posts';
+import { Spinner } from '../spinner';
+
+import * as styles from './content.module.scss';
 
 const URL = 'https://jsonplaceholder.typicode.com/posts';
 

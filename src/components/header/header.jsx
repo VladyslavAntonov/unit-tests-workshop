@@ -1,5 +1,5 @@
-import Icon from '@material-ui/icons/Refresh';
 import { useState } from 'react';
+import Icon from '@material-ui/icons/Refresh';
 
 import { formatDate } from '../../helpers/format-date';
 
