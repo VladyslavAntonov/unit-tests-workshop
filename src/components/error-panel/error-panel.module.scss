@@ -1,0 +1,15 @@
+@import '../../styles/global';
+
+.error-panel {
+    display: flex;
+    flex-direction: column;
+    $font-size: map-get($font-size, "medium");
+    font-weight: map-get($font-weight, "medium");
+    text-align: center;
+    padding: map-get($spacing, "medium");
+
+    .button {
+        background-color: transparentize($denim, .7);
+        margin: map-get($spacing, "medium");
+    }
+}

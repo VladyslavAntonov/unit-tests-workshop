@@ -1,0 +1,6 @@
+@import '../../styles/global';
+
+.button {
+    cursor: pointer;
+    padding: map-get($spacing, "small");
+}

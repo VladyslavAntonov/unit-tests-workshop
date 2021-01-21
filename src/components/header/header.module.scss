@@ -1,0 +1,18 @@
+@import '../../styles/global';
+
+.header {
+    align-items: center;
+    background-color: $denim;
+    box-shadow: transparentize($black, .50) 0px 4px 12px;
+    color: $ivory;
+    display: flex;
+    height: $header-height;
+    justify-content: space-between;
+    padding: 0 map-get($spacing, "large");
+
+    &__title {
+        font-size: map-get($font-size, "large");
+        font-weight: map-get($font-weight, "bold");
+        text-align: center;
+    }
+}

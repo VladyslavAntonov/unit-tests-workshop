@@ -1,0 +1,8 @@
+@import '../../styles/global';
+
+.footer {
+    color: $ivory;
+    background-color: transparentize($denim, 0.50);
+    padding: map-get($spacing, "medium");
+    text-align: center;
+}

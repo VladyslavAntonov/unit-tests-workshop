@@ -1,0 +1,12 @@
+@import '../../styles/global';
+
+.content {
+    display: flex;
+    place-items: center;
+    width: 100%;
+
+    .posts {
+        margin: map-get($spacing, "large");
+        width: auto;
+    }
+}
