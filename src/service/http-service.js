@@ -40,7 +40,5 @@ async function execute(request) {
     throw new Error(message);
   }
 
-  console.log(response);
-
   return await response.json();
 }
