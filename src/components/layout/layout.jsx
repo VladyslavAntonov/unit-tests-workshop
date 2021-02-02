@@ -18,5 +18,5 @@ export function Layout(props) {
 }
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired
 };

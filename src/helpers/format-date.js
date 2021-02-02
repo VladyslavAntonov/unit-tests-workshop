@@ -1,7 +1,7 @@
 const defaultOptions = {
   year: 'numeric',
   month: 'long',
-  day: 'numeric',
+  day: 'numeric'
 };
 
 export function formatDate(date, options = defaultOptions) {

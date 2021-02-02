@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Icon from '@material-ui/icons/Refresh';
+import { RefreshIcon } from '../icons';
 
 import { formatDate } from '../../helpers/format-date';
 
@@ -13,12 +13,18 @@ export function Header() {
   return (
     <header className={styles.header}>
       <Button onClick={reload}>
-        <Icon />
+        <RefreshIcon />
       </Button>
-      <div className={styles['header__title']}>
+      <div
+        className={styles['header__title']}
+        data-test-id="header-title"
+      >
         Unit Tests
       </div>
-      <div className={styles['header__date']}>
+      <div
+        className={styles['header__date']}
+        data-test-id="header-date"
+      >
         {formatDate(date)}
       </div>
     </header>

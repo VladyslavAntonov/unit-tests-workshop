@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import React from 'react';
 
 import { useAsync } from '../../hooks';
-import { HttpService } from '../../service';
+import { PostsService } from '../../service';
 
 import { ErrorPanel } from '../error-panel';
 import { Posts } from '../posts';
@@ -9,14 +9,12 @@ import { Spinner } from '../spinner';
 
 import * as styles from './content.module.scss';
 
-const URL = 'https://jsonplaceholder.typicode.com/posts';
-
 export function Content() {
-  const service = new HttpService();
+  const service = React.useContext(PostsService.context);
 
-  const { status, data, execute } = useAsync(service.read(URL));
+  const { status, data, execute } = useAsync(() => service.getAllPosts());
 
-  useEffect(() => {
+  React.useEffect(() => {
     execute();
   }, []);
 
