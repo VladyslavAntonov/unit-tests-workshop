@@ -21,6 +21,6 @@ export function ErrorPanel(props) {
 }
 
 ErrorPanel.propTypes = {
-  onRetry: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  onRetry: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired
 };

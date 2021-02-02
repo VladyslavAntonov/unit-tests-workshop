@@ -5,7 +5,7 @@ export function Spinner() {
     <div className={styles.spinner}>
       {Array.from(
           { length: 12 },
-          (_, i) => <div className={styles['spinner__element']} key={i}/>,
+          (_, i) => <div className={styles['spinner__element']} key={i}/>
       )}
     </div>
   );

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner matches the snapshot 1`] = `
+<div>
+  <div
+    key="0"
+  />
+  <div
+    key="1"
+  />
+  <div
+    key="2"
+  />
+  <div
+    key="3"
+  />
+  <div
+    key="4"
+  />
+  <div
+    key="5"
+  />
+  <div
+    key="6"
+  />
+  <div
+    key="7"
+  />
+  <div
+    key="8"
+  />
+  <div
+    key="9"
+  />
+  <div
+    key="10"
+  />
+  <div
+    key="11"
+  />
+</div>
+`;

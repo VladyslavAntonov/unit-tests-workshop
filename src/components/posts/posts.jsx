@@ -1,5 +1,5 @@
 import {
-  Table, TableBody, TableContainer, TableHead, Paper,
+  Table, TableBody, TableContainer, TableHead, Paper
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
@@ -38,5 +38,5 @@ export function Posts(props) {
 
 Posts.propTypes = {
   className: PropTypes.string,
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired
 };

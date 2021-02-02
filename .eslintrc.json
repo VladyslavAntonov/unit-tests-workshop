@@ -7,6 +7,7 @@
         "plugin:react/recommended",
         "google"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -15,13 +16,15 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "babel"
     ],
     "rules": {
         "object-curly-spacing": [
             2,
             "always"
         ],
+        "comma-dangle": ["error", "never"],
         "react/jsx-uses-react": "off",
         "react/react-in-jsx-scope": "off",
         "require-jsdoc": [
