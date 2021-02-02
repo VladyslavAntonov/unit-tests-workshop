@@ -15,7 +15,6 @@ describe('Layout', () => {
   });
 
   it('renders Header', () => {
-    console.log(component.debug());
     expect(component.find('Header').exists()).toBe(true);
   });
 });
