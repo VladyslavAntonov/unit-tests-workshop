@@ -1,11 +1,14 @@
 import { HttpService } from './http-service';
 
-const fetchSpy = jest.spyOn(global, 'fetch');
 const mockUrl = 'url';
 
 describe('HttpService', () => {
   let service;
-  let resolve;
+  let fetchSpy;
+
+  beforeAll(() => {
+    fetchSpy = jest.spyOn(global, 'fetch');
+  });
 
   beforeEach(() => {
     service = new HttpService();
@@ -20,56 +23,51 @@ describe('HttpService', () => {
   });
 
   describe('read', () => {
-    let result;
+    let resolve;
+    let error;
+    let request;
+
 
     beforeEach(() => {
-      fetchSpy.mockImplementationOnce(mockPromise);
-      service.read(mockUrl);
+      const promise = new Promise((res) => {
+        resolve = res;
+      });
+      fetchSpy.mockReturnValueOnce(promise);
+      request = service.read(mockUrl)
+          .catch((e) => (error = e));
     });
 
     it('fetches data from API', () => {
       expect(fetchSpy).toHaveBeenCalledWith(mockUrl);
     });
 
-    // describe('when the response is not ok', () => {
-    //   let error;
+    describe('when the response is not ok', () => {
+      beforeEach(async () => {
+        await resolve({
+          ok: false,
+          status: 404
+        });
+      });
 
-    //   beforeEach(async () => {
-    //     try {
-    //       await resolve({
-    //         ok: false
-    //       });
-    //     } catch (e) {
-    //       error = e;
-    //     }
-    //     // mockJson.mockResolvedValueOnce('data');
-    //   });
-
-    //   it('throws the error', () => {
-    //     expect(error.message).toBe('data');
-    //   });
-    // });
-
-    // describe('when the response is ok', () => {
-    //   const mockJson = jest.fn(() => Promise.resolve('data'));
-
-    //   beforeEach(async () => {
-    //     // mockJson.mockResolvedValueOnce('data');
-    //     await resolve({
-    //       ok: true,
-    //       json: mockJson
-    //     });
-    //   });
-
-    //   it('', () => {
-    //     expect(result).toBe('data');
-    //   });
-    // });
-  });
-
-  function mockPromise() {
-    return new Promise((res, _) => {
-      resolve = res;
+      it('throws the error', () => {
+        expect(error.message).toBe('An error has occured: 404');
+      });
     });
-  }
+
+    describe('when the response is ok', () => {
+      let result;
+
+      beforeEach(async () => {
+        await resolve({
+          ok: true,
+          json: () => Promise.resolve('data')
+        });
+        result = await request;
+      });
+
+      it('returns resolved data', () => {
+        expect(result).toBe('data');
+      });
+    });
+  });
 });
