@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 
-const defaultOptions = { 'Content-type': 'application/json; charset=UTF-8' };
+export const defaultOptions =
+  { 'Content-type': 'application/json; charset=UTF-8' };
 
 export class HttpService {
   static context = createContext();

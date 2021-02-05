@@ -1,6 +1,7 @@
-import { HttpService } from './http-service';
+import { HttpService, defaultOptions } from './http-service';
 
 const mockUrl = 'url';
+const mockBody = 'body';
 
 describe('HttpService', () => {
   let service;
@@ -29,10 +30,7 @@ describe('HttpService', () => {
 
 
     beforeEach(() => {
-      const promise = new Promise((res) => {
-        resolve = res;
-      });
-      fetchSpy.mockReturnValueOnce(promise);
+      resolve = mockFetch();
       request = service.read(mockUrl)
           .catch((e) => (error = e));
     });
@@ -70,4 +68,161 @@ describe('HttpService', () => {
       });
     });
   });
+
+  describe('create', () => {
+    let error;
+    let request;
+    let resolve;
+
+    beforeEach(() => {
+      resolve = mockFetch();
+      request = service.create(mockUrl, mockBody)
+          .catch((e) => (error = e));
+    });
+
+    it('fetches data from API with provided body using POST method', () => {
+      expect(fetchSpy).toHaveBeenCalledWith(mockUrl, {
+        body: mockBody,
+        headers: defaultOptions,
+        method: 'POST'
+      });
+    });
+
+    describe('when the response is not ok', () => {
+      beforeEach(async () => {
+        await resolve({
+          ok: false,
+          status: 404
+        });
+      });
+
+      it('throws the error', () => {
+        expect(error.message).toBe('An error has occured: 404');
+      });
+    });
+
+    describe('when the response is ok', () => {
+      let result;
+
+      beforeEach(async () => {
+        await resolve({
+          ok: true,
+          json: () => Promise.resolve('data')
+        });
+        result = await request;
+      });
+
+      it('returns resolved data', () => {
+        expect(result).toBe('data');
+      });
+    });
+  });
+
+  describe('update', () => {
+    let error;
+    let request;
+    let resolve;
+
+    beforeEach(() => {
+      resolve = mockFetch();
+      request = service.update(mockUrl, mockBody)
+          .catch((e) => (error = e));
+    });
+
+    it('fetches data from API with provided body using PUT method', () => {
+      expect(fetchSpy).toHaveBeenCalledWith(mockUrl, {
+        body: mockBody,
+        headers: defaultOptions,
+        method: 'PUT'
+      });
+    });
+
+    describe('when the response is not ok', () => {
+      beforeEach(async () => {
+        await resolve({
+          ok: false,
+          status: 404
+        });
+      });
+
+      it('throws the error', () => {
+        expect(error.message).toBe('An error has occured: 404');
+      });
+    });
+
+    describe('when the response is ok', () => {
+      let result;
+
+      beforeEach(async () => {
+        await resolve({
+          ok: true,
+          json: () => Promise.resolve('data')
+        });
+        result = await request;
+      });
+
+      it('returns resolved data', () => {
+        expect(result).toBe('data');
+      });
+    });
+  });
+
+  describe('delete', () => {
+    let error;
+    let request;
+    let resolve;
+
+    beforeEach(() => {
+      resolve = mockFetch();
+      request = service.delete(mockUrl)
+          .catch((e) => (error = e));
+    });
+
+    it('fetches data from API using DELETE method', () => {
+      expect(fetchSpy).toHaveBeenCalledWith(mockUrl, {
+        method: 'DELETE'
+      });
+    });
+
+    describe('when the response is not ok', () => {
+      beforeEach(async () => {
+        await resolve({
+          ok: false,
+          status: 404
+        });
+      });
+
+      it('throws the error', () => {
+        expect(error.message).toBe('An error has occured: 404');
+      });
+    });
+
+    describe('when the response is ok', () => {
+      let result;
+
+      beforeEach(async () => {
+        await resolve({
+          ok: true,
+          json: () => Promise.resolve('data')
+        });
+        result = await request;
+      });
+
+      it('returns resolved data', () => {
+        expect(result).toBe('data');
+      });
+    });
+  });
+
+  function mockFetch() {
+    let resolve;
+
+    fetchSpy.mockReturnValueOnce(
+        new Promise((res) => {
+          resolve = res;
+        })
+    );
+
+    return resolve;
+  }
 });
