@@ -28,7 +28,6 @@ describe('HttpService', () => {
     let error;
     let request;
 
-
     beforeEach(() => {
       resolve = mockFetch();
       request = service.read(mockUrl)
